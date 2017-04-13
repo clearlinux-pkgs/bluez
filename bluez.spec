@@ -4,7 +4,7 @@
 #
 Name     : bluez
 Version  : 5.44
-Release  : 3
+Release  : 4
 URL      : http://www.kernel.org/pub/linux/bluetooth/bluez-5.44.tar.xz
 Source0  : http://www.kernel.org/pub/linux/bluetooth/bluez-5.44.tar.xz
 Summary  : Bluetooth protocol stack for Linux
@@ -22,6 +22,7 @@ BuildRequires : pkgconfig(glib-2.0)
 BuildRequires : pkgconfig(gthread-2.0)
 BuildRequires : pkgconfig(libical)
 BuildRequires : pkgconfig(libudev)
+BuildRequires : pkgconfig(sbc)
 BuildRequires : pkgconfig(speexdsp)
 BuildRequires : readline-dev
 BuildRequires : systemd-dev
@@ -91,7 +92,7 @@ lib components for the bluez package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1492042914
+export SOURCE_DATE_EPOCH=1492044840
 %configure --disable-static --enable-library \
 --enable-manpages
 make V=1  %{?_smp_mflags}
@@ -104,7 +105,7 @@ export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1492042914
+export SOURCE_DATE_EPOCH=1492044840
 rm -rf %{buildroot}
 %make_install
 

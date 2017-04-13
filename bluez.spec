@@ -4,7 +4,7 @@
 #
 Name     : bluez
 Version  : 5.44
-Release  : 2
+Release  : 3
 URL      : http://www.kernel.org/pub/linux/bluetooth/bluez-5.44.tar.xz
 Source0  : http://www.kernel.org/pub/linux/bluetooth/bluez-5.44.tar.xz
 Summary  : Bluetooth protocol stack for Linux
@@ -12,6 +12,7 @@ Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
 Requires: bluez-bin
 Requires: bluez-config
+Requires: bluez-lib
 Requires: bluez-data
 Requires: bluez-doc
 BuildRequires : ncurses-dev
@@ -23,6 +24,7 @@ BuildRequires : pkgconfig(libical)
 BuildRequires : pkgconfig(libudev)
 BuildRequires : pkgconfig(speexdsp)
 BuildRequires : readline-dev
+BuildRequires : systemd-dev
 
 %description
 BlueZ - Bluetooth protocol stack for Linux
@@ -54,6 +56,18 @@ Group: Data
 data components for the bluez package.
 
 
+%package dev
+Summary: dev components for the bluez package.
+Group: Development
+Requires: bluez-lib
+Requires: bluez-bin
+Requires: bluez-data
+Provides: bluez-devel
+
+%description dev
+dev components for the bluez package.
+
+
 %package doc
 Summary: doc components for the bluez package.
 Group: Documentation
@@ -62,13 +76,24 @@ Group: Documentation
 doc components for the bluez package.
 
 
+%package lib
+Summary: lib components for the bluez package.
+Group: Libraries
+Requires: bluez-data
+Requires: bluez-config
+
+%description lib
+lib components for the bluez package.
+
+
 %prep
 %setup -q -n bluez-5.44
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1492040841
-%configure --disable-static
+export SOURCE_DATE_EPOCH=1492042914
+%configure --disable-static --enable-library \
+--enable-manpages
 make V=1  %{?_smp_mflags}
 
 %check
@@ -79,7 +104,7 @@ export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1492040841
+export SOURCE_DATE_EPOCH=1492042914
 rm -rf %{buildroot}
 %make_install
 
@@ -115,7 +140,28 @@ rm -rf %{buildroot}
 /usr/share/dbus-1/system-services/org.bluez.service
 /usr/share/dbus-1/system.d/bluetooth.conf
 
+%files dev
+%defattr(-,root,root,-)
+/usr/include/bluetooth/bluetooth.h
+/usr/include/bluetooth/bnep.h
+/usr/include/bluetooth/cmtp.h
+/usr/include/bluetooth/hci.h
+/usr/include/bluetooth/hci_lib.h
+/usr/include/bluetooth/hidp.h
+/usr/include/bluetooth/l2cap.h
+/usr/include/bluetooth/rfcomm.h
+/usr/include/bluetooth/sco.h
+/usr/include/bluetooth/sdp.h
+/usr/include/bluetooth/sdp_lib.h
+/usr/lib64/libbluetooth.so
+/usr/lib64/pkgconfig/bluez.pc
+
 %files doc
 %defattr(-,root,root,-)
 %doc /usr/share/man/man1/*
 %doc /usr/share/man/man8/*
+
+%files lib
+%defattr(-,root,root,-)
+/usr/lib64/libbluetooth.so.3
+/usr/lib64/libbluetooth.so.3.18.15

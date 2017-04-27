@@ -1,0 +1,1 @@
+ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.service

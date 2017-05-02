@@ -4,7 +4,7 @@
 #
 Name     : bluez
 Version  : 5.44
-Release  : 6
+Release  : 7
 URL      : http://www.kernel.org/pub/linux/bluetooth/bluez-5.44.tar.xz
 Source0  : http://www.kernel.org/pub/linux/bluetooth/bluez-5.44.tar.xz
 Summary  : Bluetooth protocol stack for Linux

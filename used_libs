@@ -6,5 +6,4 @@ libicalvcal.so.2
 libpthread.so.0
 libreadline.so.7
 librt.so.1
-libtinfow.so.6
 libudev.so.1

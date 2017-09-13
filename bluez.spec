@@ -4,7 +4,7 @@
 #
 Name     : bluez
 Version  : 5.46
-Release  : 9
+Release  : 10
 URL      : http://www.kernel.org/pub/linux/bluetooth/bluez-5.46.tar.xz
 Source0  : http://www.kernel.org/pub/linux/bluetooth/bluez-5.46.tar.xz
 Summary  : Bluetooth protocol stack for Linux
@@ -26,6 +26,7 @@ BuildRequires : pkgconfig(sbc)
 BuildRequires : pkgconfig(speexdsp)
 BuildRequires : readline-dev
 BuildRequires : systemd-dev
+Patch1: bluez.patch
 
 %description
 BlueZ - Bluetooth protocol stack for Linux
@@ -89,13 +90,14 @@ lib components for the bluez package.
 
 %prep
 %setup -q -n bluez-5.46
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1500041088
+export SOURCE_DATE_EPOCH=1505312526
 %configure --disable-static --enable-library \
 --enable-manpages \
 --with-dbusconfdir=/usr/share
@@ -106,10 +108,10 @@ export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1500041088
+export SOURCE_DATE_EPOCH=1505312526
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content

@@ -4,7 +4,7 @@
 #
 Name     : bluez
 Version  : 5.47
-Release  : 12
+Release  : 13
 URL      : http://www.kernel.org/pub/linux/bluetooth/bluez-5.47.tar.xz
 Source0  : http://www.kernel.org/pub/linux/bluetooth/bluez-5.47.tar.xz
 Summary  : Bluetooth protocol stack for Linux
@@ -82,7 +82,6 @@ doc components for the bluez package.
 Summary: lib components for the bluez package.
 Group: Libraries
 Requires: bluez-data
-Requires: bluez-config
 
 %description lib
 lib components for the bluez package.
@@ -96,7 +95,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1505395680
+export SOURCE_DATE_EPOCH=1510815414
 %configure --disable-static --enable-library \
 --enable-manpages \
 --with-dbusconfdir=/usr/share
@@ -110,7 +109,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1505395680
+export SOURCE_DATE_EPOCH=1510815414
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content

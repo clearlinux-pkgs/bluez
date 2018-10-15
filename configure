@@ -1,3 +1,5 @@
 --enable-library
 --enable-manpages
 --with-dbusconfdir=/usr/share
+--enable-experimental
+--enable-deprecated

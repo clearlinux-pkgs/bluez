@@ -4,17 +4,19 @@
 #
 Name     : bluez
 Version  : 5.50
-Release  : 19
+Release  : 21
 URL      : http://www.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz
 Source0  : http://www.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz
 Summary  : Bluetooth protocol stack for Linux
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
-Requires: bluez-bin
-Requires: bluez-config
-Requires: bluez-lib
-Requires: bluez-data
-Requires: bluez-man
+Requires: bluez-bin = %{version}-%{release}
+Requires: bluez-config = %{version}-%{release}
+Requires: bluez-data = %{version}-%{release}
+Requires: bluez-lib = %{version}-%{release}
+Requires: bluez-libexec = %{version}-%{release}
+Requires: bluez-license = %{version}-%{release}
+Requires: bluez-man = %{version}-%{release}
 BuildRequires : ncurses-dev
 BuildRequires : pkgconfig(alsa)
 BuildRequires : pkgconfig(dbus-1)
@@ -35,9 +37,11 @@ BlueZ - Bluetooth protocol stack for Linux
 %package bin
 Summary: bin components for the bluez package.
 Group: Binaries
-Requires: bluez-data
-Requires: bluez-config
-Requires: bluez-man
+Requires: bluez-data = %{version}-%{release}
+Requires: bluez-libexec = %{version}-%{release}
+Requires: bluez-config = %{version}-%{release}
+Requires: bluez-license = %{version}-%{release}
+Requires: bluez-man = %{version}-%{release}
 
 %description bin
 bin components for the bluez package.
@@ -62,22 +66,48 @@ data components for the bluez package.
 %package dev
 Summary: dev components for the bluez package.
 Group: Development
-Requires: bluez-lib
-Requires: bluez-bin
-Requires: bluez-data
-Provides: bluez-devel
+Requires: bluez-lib = %{version}-%{release}
+Requires: bluez-bin = %{version}-%{release}
+Requires: bluez-data = %{version}-%{release}
+Provides: bluez-devel = %{version}-%{release}
 
 %description dev
 dev components for the bluez package.
 
 
+%package extras
+Summary: extras components for the bluez package.
+Group: Default
+
+%description extras
+extras components for the bluez package.
+
+
 %package lib
 Summary: lib components for the bluez package.
 Group: Libraries
-Requires: bluez-data
+Requires: bluez-data = %{version}-%{release}
+Requires: bluez-libexec = %{version}-%{release}
+Requires: bluez-license = %{version}-%{release}
 
 %description lib
 lib components for the bluez package.
+
+
+%package libexec
+Summary: libexec components for the bluez package.
+Group: Default
+
+%description libexec
+libexec components for the bluez package.
+
+
+%package license
+Summary: license components for the bluez package.
+Group: Default
+
+%description license
+license components for the bluez package.
 
 
 %package man
@@ -96,10 +126,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1528221025
+export SOURCE_DATE_EPOCH=1539631815
 %configure --disable-static --enable-library \
 --enable-manpages \
---with-dbusconfdir=/usr/share
+--with-dbusconfdir=/usr/share \
+--enable-experimental \
+--enable-deprecated
 make  %{?_smp_mflags}
 
 %check
@@ -110,12 +142,15 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1528221025
+export SOURCE_DATE_EPOCH=1539631815
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/bluez
+cp COPYING %{buildroot}/usr/share/package-licenses/bluez/COPYING
+cp COPYING.LIB %{buildroot}/usr/share/package-licenses/bluez/COPYING.LIB
 %make_install
-## make_install_append content
+## install_append content
 ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.service
-## make_install_append end
+## install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -124,6 +159,13 @@ ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.serv
 
 %files bin
 %defattr(-,root,root,-)
+%exclude /usr/bin/ciptool
+%exclude /usr/bin/hciattach
+%exclude /usr/bin/hciconfig
+%exclude /usr/bin/hcidump
+%exclude /usr/bin/hcitool
+%exclude /usr/bin/rfcomm
+%exclude /usr/bin/sdptool
 /usr/bin/bccmd
 /usr/bin/bluemoon
 /usr/bin/bluetoothctl
@@ -134,8 +176,6 @@ ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.serv
 /usr/bin/l2test
 /usr/bin/mpris-proxy
 /usr/bin/rctest
-/usr/libexec/bluetooth/bluetoothd
-/usr/libexec/bluetooth/obexd
 
 %files config
 %defattr(-,root,root,-)
@@ -166,13 +206,47 @@ ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.serv
 /usr/lib64/libbluetooth.so
 /usr/lib64/pkgconfig/bluez.pc
 
+%files extras
+%defattr(-,root,root,-)
+/usr/bin/ciptool
+/usr/bin/hciattach
+/usr/bin/hciconfig
+/usr/bin/hcidump
+/usr/bin/hcitool
+/usr/bin/rfcomm
+/usr/bin/sdptool
+/usr/share/man/man1/ciptool.1
+/usr/share/man/man1/hciattach.1
+/usr/share/man/man1/hciconfig.1
+/usr/share/man/man1/hcidump.1
+/usr/share/man/man1/hcitool.1
+/usr/share/man/man1/rfcomm.1
+/usr/share/man/man1/sdptool.1
+
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libbluetooth.so.3
 /usr/lib64/libbluetooth.so.3.18.16
 
-%files man
+%files libexec
 %defattr(-,root,root,-)
+/usr/libexec/bluetooth/bluetoothd
+/usr/libexec/bluetooth/obexd
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/bluez/COPYING
+/usr/share/package-licenses/bluez/COPYING.LIB
+
+%files man
+%defattr(0644,root,root,0755)
+%exclude /usr/share/man/man1/ciptool.1
+%exclude /usr/share/man/man1/hciattach.1
+%exclude /usr/share/man/man1/hciconfig.1
+%exclude /usr/share/man/man1/hcidump.1
+%exclude /usr/share/man/man1/hcitool.1
+%exclude /usr/share/man/man1/rfcomm.1
+%exclude /usr/share/man/man1/sdptool.1
 /usr/share/man/man1/bccmd.1
 /usr/share/man/man1/btattach.1
 /usr/share/man/man1/hid2hci.1

@@ -1,0 +1,14 @@
+/usr/bin/ciptool
+/usr/bin/hciattach
+/usr/bin/hciconfig
+/usr/bin/hcidump
+/usr/bin/hcitool
+/usr/bin/rfcomm
+/usr/bin/sdptool
+/usr/share/man/man1/ciptool.1
+/usr/share/man/man1/hciattach.1
+/usr/share/man/man1/hciconfig.1
+/usr/share/man/man1/hcidump.1
+/usr/share/man/man1/hcitool.1
+/usr/share/man/man1/rfcomm.1
+/usr/share/man/man1/sdptool.1

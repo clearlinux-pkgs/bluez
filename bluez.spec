@@ -4,7 +4,7 @@
 #
 Name     : bluez
 Version  : 5.50
-Release  : 22
+Release  : 23
 URL      : http://www.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz
 Source0  : http://www.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz
 Summary  : Bluetooth protocol stack for Linux
@@ -31,6 +31,7 @@ BuildRequires : pkgconfig(speexdsp)
 BuildRequires : readline-dev
 BuildRequires : systemd-dev
 Patch1: CVE-2018-10910.patch
+Patch2: fix-build-gcc9.patch
 
 %description
 BlueZ - Bluetooth protocol stack for Linux
@@ -43,7 +44,6 @@ Requires: bluez-data = %{version}-%{release}
 Requires: bluez-libexec = %{version}-%{release}
 Requires: bluez-config = %{version}-%{release}
 Requires: bluez-license = %{version}-%{release}
-Requires: bluez-man = %{version}-%{release}
 Requires: bluez-services = %{version}-%{release}
 
 %description bin
@@ -73,6 +73,7 @@ Requires: bluez-lib = %{version}-%{release}
 Requires: bluez-bin = %{version}-%{release}
 Requires: bluez-data = %{version}-%{release}
 Provides: bluez-devel = %{version}-%{release}
+Requires: bluez = %{version}-%{release}
 
 %description dev
 dev components for the bluez package.
@@ -134,17 +135,19 @@ services components for the bluez package.
 %prep
 %setup -q -n bluez-5.50
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1548811812
-export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export SOURCE_DATE_EPOCH=1560121447
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static --enable-library \
 --enable-manpages \
 --with-dbusconfdir=/usr/share \
@@ -160,7 +163,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1548811812
+export SOURCE_DATE_EPOCH=1560121447
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/bluez
 cp COPYING %{buildroot}/usr/share/package-licenses/bluez/COPYING

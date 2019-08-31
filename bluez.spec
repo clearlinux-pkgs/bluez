@@ -4,9 +4,9 @@
 #
 Name     : bluez
 Version  : 5.50
-Release  : 23
-URL      : http://www.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz
-Source0  : http://www.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz
+Release  : 24
+URL      : https://www.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz
+Source0  : https://www.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz
 Summary  : Bluetooth protocol stack for Linux
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
@@ -141,8 +141,8 @@ services components for the bluez package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1560121447
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1567270396
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -156,14 +156,14 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1560121447
+export SOURCE_DATE_EPOCH=1567270396
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/bluez
 cp COPYING %{buildroot}/usr/share/package-licenses/bluez/COPYING
@@ -180,13 +180,6 @@ ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.serv
 
 %files bin
 %defattr(-,root,root,-)
-%exclude /usr/bin/ciptool
-%exclude /usr/bin/hciattach
-%exclude /usr/bin/hciconfig
-%exclude /usr/bin/hcidump
-%exclude /usr/bin/hcitool
-%exclude /usr/bin/rfcomm
-%exclude /usr/bin/sdptool
 /usr/bin/bccmd
 /usr/bin/bluemoon
 /usr/bin/bluetoothctl
@@ -258,13 +251,6 @@ ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.serv
 
 %files man
 %defattr(0644,root,root,0755)
-%exclude /usr/share/man/man1/ciptool.1
-%exclude /usr/share/man/man1/hciattach.1
-%exclude /usr/share/man/man1/hciconfig.1
-%exclude /usr/share/man/man1/hcidump.1
-%exclude /usr/share/man/man1/hcitool.1
-%exclude /usr/share/man/man1/rfcomm.1
-%exclude /usr/share/man/man1/sdptool.1
 /usr/share/man/man1/bccmd.1
 /usr/share/man/man1/btattach.1
 /usr/share/man/man1/hid2hci.1

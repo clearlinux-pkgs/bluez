@@ -4,7 +4,7 @@
 #
 Name     : bluez
 Version  : 5.51
-Release  : 25
+Release  : 26
 URL      : https://www.kernel.org/pub/linux/bluetooth/bluez-5.51.tar.xz
 Source0  : https://www.kernel.org/pub/linux/bluetooth/bluez-5.51.tar.xz
 Summary  : Daemons for the bluetooth protocol stack

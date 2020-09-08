@@ -1,5 +1,5 @@
 PKG_NAME := bluez
-URL = https://www.kernel.org/pub/linux/bluetooth/bluez-5.54.tar.xz
+URL = https://www.kernel.org/pub/linux/bluetooth/bluez-5.55.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common

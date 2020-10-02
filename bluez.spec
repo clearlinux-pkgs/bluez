@@ -4,13 +4,14 @@
 #
 Name     : bluez
 Version  : 5.55
-Release  : 31
+Release  : 32
 URL      : https://www.kernel.org/pub/linux/bluetooth/bluez-5.55.tar.xz
 Source0  : https://www.kernel.org/pub/linux/bluetooth/bluez-5.55.tar.xz
 Summary  : Bluetooth protocol stack for Linux
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
 Requires: bluez-bin = %{version}-%{release}
+Requires: bluez-config = %{version}-%{release}
 Requires: bluez-data = %{version}-%{release}
 Requires: bluez-lib = %{version}-%{release}
 Requires: bluez-libexec = %{version}-%{release}
@@ -39,11 +40,20 @@ Summary: bin components for the bluez package.
 Group: Binaries
 Requires: bluez-data = %{version}-%{release}
 Requires: bluez-libexec = %{version}-%{release}
+Requires: bluez-config = %{version}-%{release}
 Requires: bluez-license = %{version}-%{release}
 Requires: bluez-services = %{version}-%{release}
 
 %description bin
 bin components for the bluez package.
+
+
+%package config
+Summary: config components for the bluez package.
+Group: Default
+
+%description config
+config components for the bluez package.
 
 
 %package data
@@ -89,6 +99,7 @@ lib components for the bluez package.
 %package libexec
 Summary: libexec components for the bluez package.
 Group: Default
+Requires: bluez-config = %{version}-%{release}
 Requires: bluez-license = %{version}-%{release}
 
 %description libexec
@@ -128,7 +139,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1599596530
+export SOURCE_DATE_EPOCH=1601672465
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -138,7 +149,8 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
 --enable-manpages \
 --with-dbusconfdir=/usr/share \
 --enable-experimental \
---enable-deprecated
+--enable-deprecated \
+--enable-hid2hci
 make  %{?_smp_mflags}
 
 %check
@@ -149,7 +161,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1599596530
+export SOURCE_DATE_EPOCH=1601672465
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/bluez
 cp %{_builddir}/bluez-5.55/COPYING %{buildroot}/usr/share/package-licenses/bluez/a7a897a4bde987e597c04f16a9c28f6d3f57916d
@@ -161,6 +173,7 @@ ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.serv
 
 %files
 %defattr(-,root,root,-)
+/usr/lib/udev/hid2hci
 /usr/lib64/cups/backend/bluetooth
 
 %files bin
@@ -175,6 +188,10 @@ ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.serv
 /usr/bin/l2test
 /usr/bin/mpris-proxy
 /usr/bin/rctest
+
+%files config
+%defattr(-,root,root,-)
+/usr/lib/udev/rules.d/97-hid2hci.rules
 
 %files data
 %defattr(-,root,root,-)
@@ -235,6 +252,7 @@ ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.serv
 %defattr(0644,root,root,0755)
 /usr/share/man/man1/bccmd.1
 /usr/share/man/man1/btattach.1
+/usr/share/man/man1/hid2hci.1
 /usr/share/man/man1/l2ping.1
 /usr/share/man/man1/rctest.1
 /usr/share/man/man8/bluetoothd.8

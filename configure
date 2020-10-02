@@ -3,3 +3,4 @@
 --with-dbusconfdir=/usr/share
 --enable-experimental
 --enable-deprecated
+--enable-hid2hci

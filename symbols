@@ -12,6 +12,7 @@ libbluetooth.so.3:bt_compidtostr
 libbluetooth.so.3:bt_error
 libbluetooth.so.3:bt_free
 libbluetooth.so.3:bt_malloc
+libbluetooth.so.3:bt_malloc0
 libbluetooth.so.3:hci_authenticate_link
 libbluetooth.so.3:hci_bustostr
 libbluetooth.so.3:hci_change_link_key

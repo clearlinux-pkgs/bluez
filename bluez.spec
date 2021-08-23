@@ -5,8 +5,8 @@
 Name     : bluez
 Version  : 5.60
 Release  : 38
-URL      : https://www.kernel.org/pub/linux/bluetooth/bluez-5.60.tar.xz
-Source0  : https://www.kernel.org/pub/linux/bluetooth/bluez-5.60.tar.xz
+URL      : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.60.tar.xz
+Source0  : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.60.tar.xz
 Summary  : Bluetooth protocol stack for Linux
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1

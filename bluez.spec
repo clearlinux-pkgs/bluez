@@ -4,7 +4,7 @@
 #
 Name     : bluez
 Version  : 5.64
-Release  : 41
+Release  : 42
 URL      : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.64.tar.xz
 Source0  : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.64.tar.xz
 Summary  : Bluetooth protocol stack for Linux
@@ -18,7 +18,6 @@ Requires: bluez-libexec = %{version}-%{release}
 Requires: bluez-license = %{version}-%{release}
 Requires: bluez-man = %{version}-%{release}
 Requires: bluez-services = %{version}-%{release}
-BuildRequires : docutils
 BuildRequires : ncurses-dev
 BuildRequires : pkgconfig(alsa)
 BuildRequires : pkgconfig(dbus-1)
@@ -32,6 +31,7 @@ BuildRequires : pkgconfig(libical)
 BuildRequires : pkgconfig(libudev)
 BuildRequires : pkgconfig(sbc)
 BuildRequires : pkgconfig(speexdsp)
+BuildRequires : pypi-docutils
 BuildRequires : readline-dev
 BuildRequires : systemd-dev
 
@@ -143,7 +143,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1647467070
+export SOURCE_DATE_EPOCH=1649965576
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
@@ -165,7 +165,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1647467070
+export SOURCE_DATE_EPOCH=1649965576
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/bluez
 cp %{_builddir}/bluez-5.64/COPYING %{buildroot}/usr/share/package-licenses/bluez/a7a897a4bde987e597c04f16a9c28f6d3f57916d

@@ -4,7 +4,7 @@
 #
 Name     : bluez
 Version  : 5.65
-Release  : 43
+Release  : 44
 URL      : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.65.tar.xz
 Source0  : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.65.tar.xz
 Summary  : Bluetooth protocol stack for Linux
@@ -143,12 +143,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1658760355
+export SOURCE_DATE_EPOCH=1664889386
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure --disable-static --enable-library \
 --enable-manpages \
 --with-dbusconfdir=/usr/share \
@@ -165,11 +165,11 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1658760355
+export SOURCE_DATE_EPOCH=1664889386
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/bluez
-cp %{_builddir}/bluez-%{version}/COPYING %{buildroot}/usr/share/package-licenses/bluez/a7a897a4bde987e597c04f16a9c28f6d3f57916d
-cp %{_builddir}/bluez-%{version}/COPYING.LIB %{buildroot}/usr/share/package-licenses/bluez/32c7c5556c56cdbb2d507e27d28d081595a35a9b
+cp %{_builddir}/bluez-%{version}/COPYING %{buildroot}/usr/share/package-licenses/bluez/a7a897a4bde987e597c04f16a9c28f6d3f57916d || :
+cp %{_builddir}/bluez-%{version}/COPYING.LIB %{buildroot}/usr/share/package-licenses/bluez/32c7c5556c56cdbb2d507e27d28d081595a35a9b || :
 %make_install
 ## install_append content
 ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.service

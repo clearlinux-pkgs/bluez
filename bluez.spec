@@ -4,10 +4,10 @@
 # Using build pattern: configure
 #
 Name     : bluez
-Version  : 5.67
-Release  : 46
-URL      : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.67.tar.xz
-Source0  : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.67.tar.xz
+Version  : 5.68
+Release  : 47
+URL      : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.68.tar.xz
+Source0  : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.68.tar.xz
 Summary  : Bluetooth protocol stack for Linux
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
@@ -141,10 +141,10 @@ services components for the bluez package.
 
 
 %prep
-%setup -q -n bluez-5.67
-cd %{_builddir}/bluez-5.67
+%setup -q -n bluez-5.68
+cd %{_builddir}/bluez-5.68
 pushd ..
-cp -a bluez-5.67 buildavx2
+cp -a bluez-5.68 buildavx2
 popd
 
 %build
@@ -152,7 +152,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1688135486
+export SOURCE_DATE_EPOCH=1688402010
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -191,7 +191,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1688135486
+export SOURCE_DATE_EPOCH=1688402010
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/bluez
 cp %{_builddir}/bluez-%{version}/COPYING %{buildroot}/usr/share/package-licenses/bluez/a7a897a4bde987e597c04f16a9c28f6d3f57916d || :

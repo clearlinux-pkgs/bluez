@@ -4,10 +4,10 @@
 # Using build pattern: configure
 #
 Name     : bluez
-Version  : 5.68
-Release  : 47
-URL      : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.68.tar.xz
-Source0  : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.68.tar.xz
+Version  : 5.69
+Release  : 48
+URL      : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.69.tar.xz
+Source0  : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.69.tar.xz
 Summary  : Bluetooth protocol stack for Linux
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
@@ -141,10 +141,10 @@ services components for the bluez package.
 
 
 %prep
-%setup -q -n bluez-5.68
-cd %{_builddir}/bluez-5.68
+%setup -q -n bluez-5.69
+cd %{_builddir}/bluez-5.69
 pushd ..
-cp -a bluez-5.68 buildavx2
+cp -a bluez-5.69 buildavx2
 popd
 
 %build
@@ -152,7 +152,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1688402010
+export SOURCE_DATE_EPOCH=1692912954
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -191,7 +191,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1688402010
+export SOURCE_DATE_EPOCH=1692912954
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/bluez
 cp %{_builddir}/bluez-%{version}/COPYING %{buildroot}/usr/share/package-licenses/bluez/a7a897a4bde987e597c04f16a9c28f6d3f57916d || :
@@ -288,9 +288,9 @@ ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.serv
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libbluetooth.so.3.19.9
+/V3/usr/lib64/libbluetooth.so.3.19.10
 /usr/lib64/libbluetooth.so.3
-/usr/lib64/libbluetooth.so.3.19.9
+/usr/lib64/libbluetooth.so.3.19.10
 
 %files libexec
 %defattr(-,root,root,-)
@@ -306,7 +306,10 @@ ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.serv
 
 %files man
 %defattr(0644,root,root,0755)
+/usr/share/man/man1/bluetoothctl-mgmt.1
+/usr/share/man/man1/bluetoothctl-monitor.1
 /usr/share/man/man1/btattach.1
+/usr/share/man/man1/btmgmt.1
 /usr/share/man/man1/btmon.1
 /usr/share/man/man1/hid2hci.1
 /usr/share/man/man1/isotest.1

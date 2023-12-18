@@ -6,10 +6,10 @@
 # autospec commit: c1050fe
 #
 Name     : bluez
-Version  : 5.70
-Release  : 50
-URL      : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.70.tar.xz
-Source0  : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.70.tar.xz
+Version  : 5.71
+Release  : 51
+URL      : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.71.tar.xz
+Source0  : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.71.tar.xz
 Summary  : Bluetooth protocol stack for Linux
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
@@ -143,10 +143,10 @@ services components for the bluez package.
 
 
 %prep
-%setup -q -n bluez-5.70
-cd %{_builddir}/bluez-5.70
+%setup -q -n bluez-5.71
+cd %{_builddir}/bluez-5.71
 pushd ..
-cp -a bluez-5.70 buildavx2
+cp -a bluez-5.71 buildavx2
 popd
 
 %build
@@ -154,7 +154,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1701936913
+export SOURCE_DATE_EPOCH=1702912585
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -210,7 +210,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1701936913
+export SOURCE_DATE_EPOCH=1702912585
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/bluez
 cp %{_builddir}/bluez-%{version}/COPYING %{buildroot}/usr/share/package-licenses/bluez/a7a897a4bde987e597c04f16a9c28f6d3f57916d || :
@@ -307,9 +307,9 @@ ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.serv
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libbluetooth.so.3.19.10
+/V3/usr/lib64/libbluetooth.so.3.19.11
 /usr/lib64/libbluetooth.so.3
-/usr/lib64/libbluetooth.so.3.19.10
+/usr/lib64/libbluetooth.so.3.19.11
 
 %files libexec
 %defattr(-,root,root,-)
@@ -325,8 +325,15 @@ ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.serv
 
 %files man
 %defattr(0644,root,root,0755)
+/usr/share/man/man1/bluetoothctl-admin.1
+/usr/share/man/man1/bluetoothctl-advertise.1
+/usr/share/man/man1/bluetoothctl-endpoint.1
+/usr/share/man/man1/bluetoothctl-gatt.1
 /usr/share/man/man1/bluetoothctl-mgmt.1
 /usr/share/man/man1/bluetoothctl-monitor.1
+/usr/share/man/man1/bluetoothctl-player.1
+/usr/share/man/man1/bluetoothctl-scan.1
+/usr/share/man/man1/bluetoothctl-transport.1
 /usr/share/man/man1/btattach.1
 /usr/share/man/man1/btmgmt.1
 /usr/share/man/man1/btmon.1
@@ -334,6 +341,48 @@ ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.serv
 /usr/share/man/man1/isotest.1
 /usr/share/man/man1/l2ping.1
 /usr/share/man/man1/rctest.1
+/usr/share/man/man5/org.bluez.Adapter.5
+/usr/share/man/man5/org.bluez.AdminPolicySet.5
+/usr/share/man/man5/org.bluez.AdminPolicyStatus.5
+/usr/share/man/man5/org.bluez.AdvertisementMonitor.5
+/usr/share/man/man5/org.bluez.AdvertisementMonitorManager.5
+/usr/share/man/man5/org.bluez.Agent.5
+/usr/share/man/man5/org.bluez.AgentManager.5
+/usr/share/man/man5/org.bluez.Battery.5
+/usr/share/man/man5/org.bluez.BatteryProvider.5
+/usr/share/man/man5/org.bluez.BatteryProviderManager.5
+/usr/share/man/man5/org.bluez.Device.5
+/usr/share/man/man5/org.bluez.DeviceSet.5
+/usr/share/man/man5/org.bluez.GattCharacteristic.5
+/usr/share/man/man5/org.bluez.GattDescriptor.5
+/usr/share/man/man5/org.bluez.GattManager.5
+/usr/share/man/man5/org.bluez.GattProfile.5
+/usr/share/man/man5/org.bluez.GattService.5
+/usr/share/man/man5/org.bluez.Input.5
+/usr/share/man/man5/org.bluez.LEAdvertisement.5
+/usr/share/man/man5/org.bluez.LEAdvertisingManager.5
+/usr/share/man/man5/org.bluez.Media.5
+/usr/share/man/man5/org.bluez.MediaControl.5
+/usr/share/man/man5/org.bluez.MediaEndpoint.5
+/usr/share/man/man5/org.bluez.MediaFolder.5
+/usr/share/man/man5/org.bluez.MediaItem.5
+/usr/share/man/man5/org.bluez.MediaPlayer.5
+/usr/share/man/man5/org.bluez.MediaTransport.5
+/usr/share/man/man5/org.bluez.Network.5
+/usr/share/man/man5/org.bluez.NetworkServer.5
+/usr/share/man/man5/org.bluez.Profile.5
+/usr/share/man/man5/org.bluez.ProfileManager.5
+/usr/share/man/man5/org.bluez.obex.Agent.5
+/usr/share/man/man5/org.bluez.obex.AgentManager.5
+/usr/share/man/man5/org.bluez.obex.Client.5
+/usr/share/man/man5/org.bluez.obex.FileTransfer.5
+/usr/share/man/man5/org.bluez.obex.Message.5
+/usr/share/man/man5/org.bluez.obex.MessageAccess.5
+/usr/share/man/man5/org.bluez.obex.ObjectPush.5
+/usr/share/man/man5/org.bluez.obex.PhonebookAccess.5
+/usr/share/man/man5/org.bluez.obex.Session.5
+/usr/share/man/man5/org.bluez.obex.Synchronization.5
+/usr/share/man/man5/org.bluez.obex.Transfer.5
 /usr/share/man/man8/bluetoothd.8
 
 %files services

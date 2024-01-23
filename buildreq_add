@@ -3,3 +3,4 @@
 ncurses-dev
 systemd-dev
 readline-dev
+pypi-pygments

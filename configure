@@ -4,3 +4,4 @@
 --enable-experimental
 --enable-deprecated
 --enable-hid2hci
+--sysconfdir=/usr/share/defaults/bluez

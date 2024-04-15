@@ -7,7 +7,7 @@
 #
 Name     : bluez
 Version  : 5.75
-Release  : 55
+Release  : 56
 URL      : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.75.tar.gz
 Source0  : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.75.tar.gz
 Summary  : Bluetooth protocol stack for Linux
@@ -156,7 +156,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1713213884
+export SOURCE_DATE_EPOCH=1713214177
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -174,7 +174,8 @@ export GOAMD64=v2
 --with-dbusconfdir=/usr/share \
 --enable-experimental \
 --enable-deprecated \
---enable-hid2hci
+--enable-hid2hci \
+--sysconfdir=/usr/share/defaults/bluez
 make  %{?_smp_mflags}
 
 unset PKG_CONFIG_PATH
@@ -190,7 +191,8 @@ LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS -march=x86-64-v3 "
 --with-dbusconfdir=/usr/share \
 --enable-experimental \
 --enable-deprecated \
---enable-hid2hci
+--enable-hid2hci \
+--sysconfdir=/usr/share/defaults/bluez
 make  %{?_smp_mflags}
 popd
 %check
@@ -214,7 +216,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1713213884
+export SOURCE_DATE_EPOCH=1713214177
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/bluez
 cp %{_builddir}/bluez-%{version}/COPYING %{buildroot}/usr/share/package-licenses/bluez/a7a897a4bde987e597c04f16a9c28f6d3f57916d || :
@@ -270,6 +272,9 @@ ln -sv bluetooth.service %{buildroot}/usr/lib/systemd/system/dbus-org.bluez.serv
 /usr/share/dbus-1/services/org.bluez.obex.service
 /usr/share/dbus-1/system-services/org.bluez.service
 /usr/share/dbus-1/system.d/bluetooth.conf
+/usr/share/defaults/bluez/bluetooth/input.conf
+/usr/share/defaults/bluez/bluetooth/main.conf
+/usr/share/defaults/bluez/bluetooth/network.conf
 /usr/share/zsh/site-functions/_bluetoothctl
 
 %files dev

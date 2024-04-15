@@ -1,5 +1,5 @@
-/builddir/build/BUILDROOT/bluez-5.74-54.x86_64/etc/:
-/builddir/build/BUILDROOT/bluez-5.74-54.x86_64/etc/bluetooth:
+/builddir/build/BUILDROOT/bluez-5.75-55.x86_64/etc/:
+/builddir/build/BUILDROOT/bluez-5.75-55.x86_64/etc/bluetooth:
 bluetooth
 input.conf
 main.conf

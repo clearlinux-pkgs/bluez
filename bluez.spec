@@ -6,10 +6,10 @@
 # autospec commit: 5905be9
 #
 Name     : bluez
-Version  : 5.75
-Release  : 56
-URL      : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.75.tar.gz
-Source0  : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.75.tar.gz
+Version  : 5.76
+Release  : 57
+URL      : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.76.tar.gz
+Source0  : https://mirrors.kernel.org/pub/linux/bluetooth/bluez-5.76.tar.gz
 Summary  : Bluetooth protocol stack for Linux
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
@@ -145,10 +145,10 @@ services components for the bluez package.
 
 
 %prep
-%setup -q -n bluez-5.75
-cd %{_builddir}/bluez-5.75
+%setup -q -n bluez-5.76
+cd %{_builddir}/bluez-5.76
 pushd ..
-cp -a bluez-5.75 buildavx2
+cp -a bluez-5.76 buildavx2
 popd
 
 %build
@@ -156,7 +156,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1713214177
+export SOURCE_DATE_EPOCH=1715956362
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -216,7 +216,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1713214177
+export SOURCE_DATE_EPOCH=1715956362
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/bluez
 cp %{_builddir}/bluez-%{version}/COPYING %{buildroot}/usr/share/package-licenses/bluez/a7a897a4bde987e597c04f16a9c28f6d3f57916d || :
